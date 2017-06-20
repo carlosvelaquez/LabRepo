@@ -69,34 +69,47 @@ public class Persona implements Serializable{
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
+    
     
     
 }
 
 
 class Hijo extends Persona{
-    Padre padre;
+    Persona padre;
     String nombrePadre;
     int edadPadre;
     int hermanos;
     int hermanas;
     int hermanosTotal;
 
-    public Hijo(Padre padre, String nombre, int edad, char sexo, String lugarNacimiento, String lugarResidencia, boolean vivo) {
+    public Hijo(Persona padre, String nombre, int edad, char sexo, String lugarNacimiento, String lugarResidencia, boolean vivo) {
         super(nombre, edad, sexo, lugarNacimiento, lugarResidencia, vivo);
         this.padre = padre;
         
         if (padre != null) {
             this.nombrePadre = padre.getNombre();
             this.edadPadre = padre.getEdad();
-            this.hermanos = padre.getCantidadHijos();
-            this.hermanas = padre.getCantidadHijas();
-            this.hermanosTotal = padre.getCantidadHijosTotal();
+            
+            if (padre instanceof Padre) {
+                Padre p = (Padre) padre;
+                
+                this.hermanos = p.getCantidadHijos();
+                this.hermanas = p.getCantidadHijas();
+                this.hermanosTotal = p.getCantidadHijosTotal();
+            }
+            
         }
         
     }
 
-    public Padre getPadre() {
+    public Persona getPadre() {
         return padre;
     }
 
@@ -144,6 +157,11 @@ class Hijo extends Persona{
         this.hermanosTotal = hermanosTotal;
     }
     
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
     
 }
 
@@ -156,7 +174,7 @@ class Padre extends Hijo{
     String primerHijo;
 
     public Padre(int cantidadHijos, int cantidadHijas, int cantidadHijosTotal, String trabajo, int añosPadre, String primerHijo, Padre padre, String nombrePadre, int edadPadre, int hermanos, int hermanas, int hermanosTotal, String nombre, int edad, char sexo, String lugarNacimiento, String lugarResidencia, boolean vivo) {
-        super(padre, nombrePadre, edadPadre, hermanos, hermanas, hermanosTotal, nombre, edad, sexo, lugarNacimiento, lugarResidencia, vivo);
+        super(padre, nombre, edad, sexo, lugarNacimiento, lugarResidencia, vivo);
         this.cantidadHijos = cantidadHijos;
         this.cantidadHijas = cantidadHijas;
         this.cantidadHijosTotal = cantidadHijosTotal;
@@ -213,5 +231,8 @@ class Padre extends Hijo{
         this.primerHijo = primerHijo;
     }
     
-    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

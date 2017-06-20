@@ -255,7 +255,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnhAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhAñadirActionPerformed
-        if (tfnhPadre.getText().equals("Ninguno")) {
+        if (tfnhPadre.getText().equals("Personas")) {
             char gen;
             
             if (rbnhF.isSelected()) {
@@ -290,8 +290,10 @@ public class GUI extends javax.swing.JFrame {
                 vive = true;
             }
             
-            Hijo h = new Hijo((Padre) getTreeItem(), tfnhNombre.getText(), (int) spnhEdad.getValue(), gen, tfnhLugarNacimiento.getText(), tfnhLugarResidencia.getText(), vive);
-            ((DefaultMutableTreeNode) jtArbol.getModel().getRoot()).add(new DefaultMutableTreeNode(h));
+            Persona padre = (Persona) getTreeItem();
+            
+            Hijo h = new Hijo(padre, tfnhNombre.getText(), (int) spnhEdad.getValue(), gen, tfnhLugarNacimiento.getText(), tfnhLugarResidencia.getText(), vive);
+            (getTreeNode()).add(new DefaultMutableTreeNode(h));
         }
         
         JOptionPane.showMessageDialog(jdNuevoHijo, "Hijo añadido exitosamente");
@@ -403,11 +405,24 @@ public class GUI extends javax.swing.JFrame {
             DefaultMutableTreeNode n = (DefaultMutableTreeNode) jtArbol.getLastSelectedPathComponent();
             return n.getUserObject();
         } catch (NullPointerException e) {
-            return "Ninguno";
+            return "Personas";
         }
         
     }
 
     private void cambPadre(Object p) {
+    }
+
+    
+
+    private DefaultMutableTreeNode getTreeNode() {
+        try {
+            DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
+        
+            DefaultMutableTreeNode n = (DefaultMutableTreeNode) jtArbol.getLastSelectedPathComponent();
+            return n;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 }
