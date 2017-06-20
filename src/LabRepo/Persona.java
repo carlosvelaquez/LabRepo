@@ -74,6 +74,12 @@ public class Persona implements Serializable{
     public String toString() {
         return nombre;
     }
+
+    public String toFullString() {
+        return nombre + "\nEdad: " + edad + "\nSexo: " + sexo + "\nLugar de Nacimiento: " + lugarNacimiento + "\nLugar de Residencia: " + lugarResidencia + "\n¿Vivo? " + vivo;
+    }
+    
+    
     
     
     

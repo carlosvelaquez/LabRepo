@@ -5,10 +5,12 @@
  */
 package LabRepo;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -68,6 +70,25 @@ public class GUI extends javax.swing.JFrame {
         bgVivo = new javax.swing.ButtonGroup();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jdModHijo = new javax.swing.JDialog();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tfnhNombre1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        spnhEdad1 = new javax.swing.JSpinner();
+        jLabel14 = new javax.swing.JLabel();
+        rbnhM1 = new javax.swing.JRadioButton();
+        rbnhF1 = new javax.swing.JRadioButton();
+        jLabel15 = new javax.swing.JLabel();
+        tfnhLugarNacimiento1 = new javax.swing.JTextField();
+        tfnhLugarResidencia1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        rbnhSi1 = new javax.swing.JRadioButton();
+        rbnhNo1 = new javax.swing.JRadioButton();
+        btnhAñadir1 = new javax.swing.JButton();
+        tfnhPadre1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtArbol = new javax.swing.JTree();
@@ -93,7 +114,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setText("Sexo");
 
         bgSexo.add(rbnhM);
-        rbnhM.setSelected(true);
         rbnhM.setText("M");
 
         bgSexo.add(rbnhF);
@@ -218,6 +238,138 @@ public class GUI extends javax.swing.JFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
+        jLabel10.setFont(new java.awt.Font("Calibri Light", 0, 30)); // NOI18N
+        jLabel10.setText("Modificar Hijo");
+
+        jLabel11.setText("Persona Seleccionada");
+
+        jLabel12.setText("Nombre");
+
+        jLabel13.setText("Edad");
+
+        jLabel14.setText("Sexo");
+
+        bgSexo.add(rbnhM1);
+        rbnhM1.setSelected(true);
+        rbnhM1.setText("M");
+
+        bgSexo.add(rbnhF1);
+        rbnhF1.setText("F");
+        rbnhF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnhF1ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Lugar de Nacimiento");
+
+        jLabel16.setText("Lugar de Residencia");
+
+        jLabel17.setText("¿Está Vivo?");
+
+        bgVivo.add(rbnhSi1);
+        rbnhSi1.setText("Si");
+
+        bgVivo.add(rbnhNo1);
+        rbnhNo1.setText("No");
+
+        btnhAñadir1.setText("Modificar Hijo");
+        btnhAñadir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhAñadir1ActionPerformed(evt);
+            }
+        });
+
+        tfnhPadre1.setEditable(false);
+        tfnhPadre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfnhPadre1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jdModHijoLayout = new javax.swing.GroupLayout(jdModHijo.getContentPane());
+        jdModHijo.getContentPane().setLayout(jdModHijoLayout);
+        jdModHijoLayout.setHorizontalGroup(
+            jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdModHijoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdModHijoLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbnhSi1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbnhNo1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jdModHijoLayout.createSequentialGroup()
+                        .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfnhNombre1)
+                            .addComponent(tfnhLugarNacimiento1)
+                            .addComponent(tfnhLugarResidencia1)
+                            .addComponent(btnhAñadir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jdModHijoLayout.createSequentialGroup()
+                                .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdModHijoLayout.createSequentialGroup()
+                                        .addComponent(spnhEdad1)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addGroup(jdModHijoLayout.createSequentialGroup()
+                                                .addComponent(rbnhM1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rbnhF1))))
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel13)
+                                    .addComponent(tfnhPadre1))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
+        );
+        jdModHijoLayout.setVerticalGroup(
+            jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdModHijoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfnhPadre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfnhNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbnhM1)
+                        .addComponent(rbnhF1))
+                    .addGroup(jdModHijoLayout.createSequentialGroup()
+                        .addComponent(spnhEdad1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfnhLugarNacimiento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfnhLugarResidencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jdModHijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(rbnhSi1)
+                    .addComponent(rbnhNo1))
+                .addGap(18, 18, 18)
+                .addComponent(btnhAñadir1)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 36)); // NOI18N
@@ -235,8 +387,18 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jButton3.setText("Eliminar Persona");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Modificar Persona");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Generar Reporte");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -402,6 +564,7 @@ public class GUI extends javax.swing.JFrame {
         }
         
         JOptionPane.showMessageDialog(jdNuevoHijo, "Hijo añadido exitosamente");
+        refrescarTabla();
     }//GEN-LAST:event_btnhAñadirActionPerformed
 
     private void rbnhFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnhFActionPerformed
@@ -415,6 +578,7 @@ public class GUI extends javax.swing.JFrame {
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         try {
             guardarTodo();
+            refrescarTabla();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al guardar archivo");
         }
@@ -423,6 +587,7 @@ public class GUI extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         try {
             leerTodo();
+            refrescarTabla();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al leer archivo");
         }
@@ -437,8 +602,97 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        FileWriter fw = null;
+        try {
+            DefaultMutableTreeNode n = (DefaultMutableTreeNode) jtArbol.getModel().getRoot();
+            File f = new File("./arbolG.txt");
+            fw = new FileWriter(f, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            for (int i = 0; i < n.getChildCount(); i++) {
+                DefaultMutableTreeNode n2 = (DefaultMutableTreeNode) n.getChildAt(i);
+                bw.write(((Persona) n2.getUserObject()).toFullString() + "\n\n");
+            }
+            
+            bw.flush();
+            JOptionPane.showMessageDialog(this, "Reporte guardado en la raíz del proyecto");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar reporte");
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al guardar reporte");
+            }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            DefaultMutableTreeNode rn = getTreeNode();
+            DefaultMutableTreeNode rnP = (DefaultMutableTreeNode) rn.getParent();
+
+            rnP.remove(rn);
+            JOptionPane.showMessageDialog(jdNuevoHijo, "Persona elmininada exitosamente");
+            
+            refrescarTabla();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jdNuevoHijo, "No puede eliminar ese registro");
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void rbnhF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnhF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbnhF1ActionPerformed
+
+    private void btnhAñadir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhAñadir1ActionPerformed
+         if (tfnhPadre1.getText().equals("Personas")) {
+            JOptionPane.showMessageDialog(jdModHijo, "No puede modificar ese registro");
+        }else{
+            char gen;
+            
+            if (rbnhF1.isSelected()) {
+                gen = 'F';
+            }else{
+                gen = 'M';
+            }
+       
+            boolean vive;
+            
+            if (rbnhNo1.isSelected()) {
+                vive = false;
+            }else{
+                vive = true;
+            }
+            
+            Persona padre = (Persona) getTreeItem();
+            
+            Hijo h = new Hijo(padre, tfnhNombre1.getText(), (int) spnhEdad1.getValue(), gen, tfnhLugarNacimiento1.getText(), tfnhLugarResidencia1.getText(), vive);
+            
+            ArrayList<TreeNode> tns = new ArrayList();
+            DefaultMutableTreeNode rn = getTreeNode();
+            DefaultMutableTreeNode rnP = (DefaultMutableTreeNode) rn.getParent();
+            DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
+            
+            rnP.add(new DefaultMutableTreeNode(h));
+            rnP.remove(rn);
+            
+            JOptionPane.showMessageDialog(jdModHijo, "Hijo modificado exitosamente");
+            refrescarTabla();
+        }
+        
+        
+    }//GEN-LAST:event_btnhAñadir1ActionPerformed
+
+    private void tfnhPadre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfnhPadre1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfnhPadre1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        tfnhPadre1.setText(getTreeItem().toString());
+        mostrarDialogo(jdModHijo);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,11 +735,20 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgSexo;
     private javax.swing.ButtonGroup bgVivo;
     private javax.swing.JButton btnhAñadir;
+    private javax.swing.JButton btnhAñadir1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -502,17 +765,27 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JDialog jdModHijo;
     private javax.swing.JDialog jdNuevoHijo;
     private javax.swing.JTree jtArbol;
     private javax.swing.JRadioButton rbnhF;
+    private javax.swing.JRadioButton rbnhF1;
     private javax.swing.JRadioButton rbnhM;
+    private javax.swing.JRadioButton rbnhM1;
     private javax.swing.JRadioButton rbnhNo;
+    private javax.swing.JRadioButton rbnhNo1;
     private javax.swing.JRadioButton rbnhSi;
+    private javax.swing.JRadioButton rbnhSi1;
     private javax.swing.JSpinner spnhEdad;
+    private javax.swing.JSpinner spnhEdad1;
     private javax.swing.JTextField tfnhLugarNacimiento;
+    private javax.swing.JTextField tfnhLugarNacimiento1;
     private javax.swing.JTextField tfnhLugarResidencia;
+    private javax.swing.JTextField tfnhLugarResidencia1;
     private javax.swing.JTextField tfnhNombre;
+    private javax.swing.JTextField tfnhNombre1;
     private javax.swing.JTextField tfnhPadre;
+    private javax.swing.JTextField tfnhPadre1;
     // End of variables declaration//GEN-END:variables
 
     void refrescarArbol(){
@@ -590,5 +863,10 @@ public class GUI extends javax.swing.JFrame {
         jtArbol.setModel(tm);
         
         JOptionPane.showMessageDialog(this, "Datos leidos exitosamente");
+    }
+
+    private void refrescarTabla() {
+        DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
+        jtArbol.setModel(tm);
     }
 }

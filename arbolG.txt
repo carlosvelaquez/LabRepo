@@ -1,0 +1,7 @@
+dqw
+Edad: 1
+Sexo: M
+Lugar de Nacimiento: dqw
+Lugar de Residencia: qwd
+¿Vivo? true
+
