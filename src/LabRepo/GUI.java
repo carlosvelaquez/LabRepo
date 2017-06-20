@@ -5,10 +5,23 @@
  */
 package LabRepo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -53,12 +66,20 @@ public class GUI extends javax.swing.JFrame {
         tfnhPadre = new javax.swing.JTextField();
         bgSexo = new javax.swing.ButtonGroup();
         bgVivo = new javax.swing.ButtonGroup();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtArbol = new javax.swing.JTree();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 30)); // NOI18N
         jLabel2.setText("Añadir Nuevo Hijo");
@@ -92,6 +113,7 @@ public class GUI extends javax.swing.JFrame {
         bgVivo.add(rbnhSi);
         rbnhSi.setText("Si");
 
+        bgVivo.add(rbnhNo);
         rbnhNo.setText("No");
 
         btnhAñadir.setText("Añadir Hijo");
@@ -192,6 +214,10 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jMenu4.setText("jMenu4");
+
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 36)); // NOI18N
@@ -212,6 +238,47 @@ public class GUI extends javax.swing.JFrame {
 
         jButton4.setText("Modificar Persona");
 
+        jButton5.setText("Generar Reporte");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("Guardar");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Cargar");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("About");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
+
+        jMenu5.setText("Salir");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu5);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,7 +295,8 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -237,8 +305,10 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
@@ -272,7 +342,26 @@ public class GUI extends javax.swing.JFrame {
                 vive = true;
             }
             Hijo h = new Hijo(null, tfnhNombre.getText(), (int) spnhEdad.getValue(), gen, tfnhLugarNacimiento.getText(), tfnhLugarResidencia.getText(), vive);
-            ((DefaultMutableTreeNode) jtArbol.getModel().getRoot()).add(new DefaultMutableTreeNode(h));
+            ArrayList<TreeNode> tns = new ArrayList();
+            DefaultMutableTreeNode rn = ((DefaultMutableTreeNode) jtArbol.getModel().getRoot());
+            DefaultTreeModel tm = new DefaultTreeModel(null);
+            
+            for (int i = 0; i < rn.getChildCount(); i++) {
+                tns.add(rn.getChildAt(i));
+            }
+            
+            rn.removeAllChildren();
+            
+            for (TreeNode tn : tns) {
+                rn.add(new DefaultMutableTreeNode(tn));
+            }
+            
+            rn.add(new DefaultMutableTreeNode(h));
+            tm.setRoot(rn);
+            
+            jtArbol.setModel(tm);
+            jdNuevoHijo.dispose();
+                        
         }else{
             char gen;
             
@@ -293,7 +382,23 @@ public class GUI extends javax.swing.JFrame {
             Persona padre = (Persona) getTreeItem();
             
             Hijo h = new Hijo(padre, tfnhNombre.getText(), (int) spnhEdad.getValue(), gen, tfnhLugarNacimiento.getText(), tfnhLugarResidencia.getText(), vive);
-            (getTreeNode()).add(new DefaultMutableTreeNode(h));
+            
+            ArrayList<TreeNode> tns = new ArrayList();
+            DefaultMutableTreeNode rn = getTreeNode();
+            DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
+            
+            for (int i = 0; i < rn.getChildCount(); i++) {
+                tns.add(rn.getChildAt(i));
+            }
+            
+            rn = new DefaultMutableTreeNode();
+            
+            for (TreeNode tn : tns) {
+                rn.add(new DefaultMutableTreeNode(tn));
+            }
+            
+            rn.add(new DefaultMutableTreeNode(h));
+            
         }
         
         JOptionPane.showMessageDialog(jdNuevoHijo, "Hijo añadido exitosamente");
@@ -306,6 +411,34 @@ public class GUI extends javax.swing.JFrame {
     private void tfnhPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfnhPadreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfnhPadreActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        try {
+            guardarTodo();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar archivo");
+        }
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        try {
+            leerTodo();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al leer archivo");
+        }
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        JOptionPane.showMessageDialog(this, "SotaTree v0.1\nSoftware de árbol genealógico.\nCopyright 2017 - getNumericValue");
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,6 +484,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -360,6 +494,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JDialog jdNuevoHijo;
     private javax.swing.JTree jtArbol;
@@ -401,7 +542,6 @@ public class GUI extends javax.swing.JFrame {
         
         try {
             DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
-        
             DefaultMutableTreeNode n = (DefaultMutableTreeNode) jtArbol.getLastSelectedPathComponent();
             return n.getUserObject();
         } catch (NullPointerException e) {
@@ -417,12 +557,38 @@ public class GUI extends javax.swing.JFrame {
 
     private DefaultMutableTreeNode getTreeNode() {
         try {
-            DefaultTreeModel tm = (DefaultTreeModel) jtArbol.getModel();
-        
             DefaultMutableTreeNode n = (DefaultMutableTreeNode) jtArbol.getLastSelectedPathComponent();
             return n;
         } catch (NullPointerException e) {
             return null;
         }
+    }
+
+    private void guardarTodo() throws FileNotFoundException, IOException {
+        JFileChooser jfc = new JFileChooser();
+        jfc.showSaveDialog(this);
+        File f = (jfc.getSelectedFile());
+        
+        FileOutputStream fos = new FileOutputStream(f);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        
+        oos.writeObject(jtArbol.getModel());
+        oos.flush();
+        
+        JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
+    }
+
+    private void leerTodo() throws IOException, ClassNotFoundException {
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(this);
+        File f = (jfc.getSelectedFile());
+        
+        FileInputStream fos = new FileInputStream(f);
+        ObjectInputStream oos = new ObjectInputStream(fos);
+        
+        DefaultTreeModel tm = (DefaultTreeModel) oos.readObject();
+        jtArbol.setModel(tm);
+        
+        JOptionPane.showMessageDialog(this, "Datos leidos exitosamente");
     }
 }
